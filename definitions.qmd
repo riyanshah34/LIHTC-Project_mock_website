@@ -1,0 +1,29 @@
+## Georgia DCA LIHTC Scoring Criteria Summary
+
+| Category                                   | Max Pts | Summary Description |
+|-------------------------------------------|---------|----------------------|
+| **Extended Affordability Commitment**     | 6       | Waive Qualified Contract (up to 5 pts) + ROFR (+1 pt) or Resident-ownership plan (+1 pt) |
+| **Minority- & Women-Owned Business**      | 2       | Either 10% spend on MWBE (audited) or MWBE team ownership (≥15%) |
+| **Favorable Financing**                   | 5       | Combine cheap funding (≤4 pts) + property-cost reduction (≤1 pt) |
+| **Compliance Performance**                | 10      | Start at 10 pts; subtract for SAEs/ACs, add back for good track record |
+| **Integrated Supportive Housing**         | 5       | Mix of referrals, PBRA, tenant prefs, and prior performance |
+| **Readiness to Proceed**                  | 13      | Shovel-readiness: zoning, permits, site plans, financing docs |
+| **Deeper Rent Targeting / PBRA**          | 3       | AMI avg ≤58% (2 pts) or ≥20% units with ≥10-yr PBRA (3 pts) |
+| **HCV & PHA Notices**                     | 2       | Register as Section 8 landlord + notify local PHAs |
+| **Desirable/Undesirable Activities**      | ±20     | Score for proximity to amenities or hazards (net effect) |
+| **Community Transportation Options**      | 6       | TOD proximity (up to 6 pts) or fixed-route transit access (up to 3 pts) |
+| **Quality Education Areas**               | 3       | Points for schools with high CCRPI/BTO performance in attendance zone |
+| **Revitalization / Redevelopment Plans**  | 10      | Inside active CRP areas + planning best practices + partner investment |
+| **Stable Communities**                    | 10      | Based on tract indicators (poverty, income, transit, jobs, env. health) |
+| **Community Designations**                | 10      | Purpose-Built or HUD CNI-anchored applications only |
+| **Phased Development**                    | 4       | For 2nd/3rd phase of prior LIHTC development in past 6 QAPs |
+| **Previous Projects**                     | 5       | Rewards counties/tracts with few/no recent awards |
+| **Housing Needs Characteristics**         | 10      | For high-need, high-growth tracts (non-Atlanta Metro) |
+| **Economic Development Proximity**        | 1       | Near major new job-creating projects (≥90 or ≥250 jobs) |
+| **Mixed-Income Developments**             | 1       | Include market-rate units or elect income-averaging |
+| **Historic Preservation**                 | 2       | Rehab certified historic structures using HTC equity |
+| **Enriched Property Services**            | 2       | CORES-certified GP or 3rd-party service coordinator |
+| **DCA Community Initiatives**             | 2       | Inside GICH area with formal support letter |
+| **Preservation Scoring (Rehab Only)**     | 62      | Based on occupancy, rent gap, age, LURC, site, USDA risk |
+
+> **Note:** Some scores (e.g., Preservation) only apply to specific project types. See full QAP for eligibility details.

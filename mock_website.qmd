@@ -1,0 +1,30 @@
+---
+title: "Invest Atlanta Sponsored Program to Assist Developers"
+Subtitle: "Affordable Housing Tax Credit Map and Calculator"
+author: Daniel Nickas
+format: html
+---
+
+## Affordable Housing Tax Credit Calculator
+
+#### Welcome to a mock up just to see if this actually runs. More to come soon!
+
+
+
+
+
+```{python}
+#| echo: false
+#| fig-cap: "Map of Georgia"
+#| fig-align: center
+import geopandas as gpd
+import matplotlib.pyplot as plt
+
+shapefile_path = "/Users/danielnickas/Downloads/cb_2022_us_state_20m/cb_2022_us_state_20m.shp"
+states = gpd.read_file(shapefile_path)
+georgia = states[states["NAME"] == "Georgia"]
+georgia.plot(edgecolor='black', color='lightblue')
+plt.title("Map of Georgia")
+plt.axis('off')
+plt.show()
+```
