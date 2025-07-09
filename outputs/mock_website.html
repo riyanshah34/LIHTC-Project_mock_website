@@ -146,16 +146,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="affordable-housing-tax-credit-calculator">Affordable Housing Tax Credit Calculator</h2>
 <section id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon" class="level4">
 <h4 class="anchored" data-anchor-id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon">Welcome to a mock up just to see if this actually runs. More to come soon!</h4>
-<div id="137241a5" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="mock_website_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
-<figcaption>Map of Georgia</figcaption>
-</figure>
-</div>
-</div>
-</div>
+<p>{python} #| echo: false #| fig-cap: “Map of Georgia” #| fig-align: center import geopandas as gpd import matplotlib.pyplot as plt shapefile_path = “/Users/riyanshah/Documents/GitHub/LIHTC-Project_mock_website/data” states = gpd.read_file(shapefile_path) georgia = states[states[“NAME”] == “Georgia”] georgia.plot(edgecolor=‘black’, color=‘lightblue’) plt.title(“Map of Georgia”) plt.axis(‘off’) plt.show()</p>
 
 
 </section>

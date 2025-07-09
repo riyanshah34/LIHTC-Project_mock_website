@@ -18,13 +18,13 @@
     "href": "mock_website.html",
     "title": "Invest Atlanta Sponsored Program to Assist Developers",
     "section": "",
-    "text": "Map of Georgia"
+    "text": "{python} #| echo: false #| fig-cap: “Map of Georgia” #| fig-align: center import geopandas as gpd import matplotlib.pyplot as plt shapefile_path = “/Users/riyanshah/Documents/GitHub/LIHTC-Project_mock_website/data” states = gpd.read_file(shapefile_path) georgia = states[states[“NAME”] == “Georgia”] georgia.plot(edgecolor=‘black’, color=‘lightblue’) plt.title(“Map of Georgia”) plt.axis(‘off’) plt.show()"
   },
   {
     "objectID": "mock_website.html#affordable-housing-tax-credit-calculator",
     "href": "mock_website.html#affordable-housing-tax-credit-calculator",
     "title": "Invest Atlanta Sponsored Program to Assist Developers",
     "section": "",
-    "text": "Map of Georgia"
+    "text": "{python} #| echo: false #| fig-cap: “Map of Georgia” #| fig-align: center import geopandas as gpd import matplotlib.pyplot as plt shapefile_path = “/Users/riyanshah/Documents/GitHub/LIHTC-Project_mock_website/data” states = gpd.read_file(shapefile_path) georgia = states[states[“NAME”] == “Georgia”] georgia.plot(edgecolor=‘black’, color=‘lightblue’) plt.title(“Map of Georgia”) plt.axis(‘off’) plt.show()"
   }
 ]
