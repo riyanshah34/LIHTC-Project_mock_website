@@ -12,7 +12,6 @@ format: html
 
 
 
-
 ```{python}
 #| echo: false
 #| fig-cap: "Map of Georgia"
@@ -20,7 +19,7 @@ format: html
 import geopandas as gpd
 import matplotlib.pyplot as plt
 
-shapefile_path = "/Users/danielnickas/Downloads/cb_2022_us_state_20m/cb_2022_us_state_20m.shp"
+shapefile_path = 
 states = gpd.read_file(shapefile_path)
 georgia = states[states["NAME"] == "Georgia"]
 georgia.plot(edgecolor='black', color='lightblue')
