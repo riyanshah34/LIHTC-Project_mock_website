@@ -9,21 +9,55 @@ format: html
 
 #### Welcome to a mock up just to see if this actually runs. More to come soon!
 
-
-
-
+### Georgia Map
 ```{python}
 #| echo: false
-#| fig-cap: "Map of Georgia"
+#| fig-cap: "Interactive Map"
 #| fig-align: center
-import geopandas as gpd
-import matplotlib.pyplot as plt
+import folium
 
-shapefile_path = "/Users/danielnickas/Downloads/LIHTC-Project_mock_website/data/cb_2022_us_state_20m.shp"
-states = gpd.read_file(shapefile_path)
-georgia = states[states["NAME"] == "Georgia"]
-georgia.plot(edgecolor='black', color='lightblue')
-plt.title("Map of Georgia")
-plt.axis('off')
-plt.show()
+# Create folium map
+m = folium.Map(location=[32.1656, -82.9001], zoom_start=6)
+
+# Add sample layers
+urban = folium.FeatureGroup(name='Urban Areas').add_to(m)
+rural = folium.FeatureGroup(name='Rural Counties').add_to(m)
+
+# Sample markers
+folium.Marker([33.7490, -84.3880], popup='Atlanta').add_to(urban)
+folium.Marker([31.1499, -81.4915], popup='Brunswick').add_to(rural)
+
+# Add layer control
+folium.LayerControl().add_to(m)
+
+# Save the map to an HTML file
+m.save('map.html')
 ```
+
+:::{.columns}
+::: {.column width="50%"}
+<iframe src="map.html" width="100%" height="500px" style="border:1px solid #ccc;"></iframe>
+:::
+
+::: {.column width="50%" style="padding-left: 20px;"}
+### Locality-Specific Criteria
+
+<form>
+  <label><input type="checkbox" onclick="toggleLayer('Desirable/Undesirable Activities')" checked>
+    Desirable/Undesirable Activities (±20)</label><br>
+
+  <label><input type="checkbox" onclick="toggleLayer('Community Transportation Options')" checked>
+    Community Transportation Options (max 6)</label><br>
+
+  <label><input type="checkbox" onclick="toggleLayer('Quality Education Areas')" checked>
+    Quality Education Areas (max 3)</label><br>
+
+  <label><input type="checkbox" onclick="toggleLayer('Stable Communities')" checked>
+    Stable Communities (max 10)</label><br>
+
+  <label><input type="checkbox" onclick="toggleLayer('Housing Needs Characteristics')" checked>
+    Housing Needs Characteristics (max 10)</label><br>
+</form>
+:::
+:::
+

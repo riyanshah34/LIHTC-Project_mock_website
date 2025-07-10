@@ -102,6 +102,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./definitions.html"> 
 <span class="menu-text">Georgia DCA LIHTC Scoring Criteria Summary</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./QAP.html"> 
+<span class="menu-text">2024–2025 Georgia QAP PDF</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -146,14 +150,24 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="affordable-housing-tax-credit-calculator">Affordable Housing Tax Credit Calculator</h2>
 <section id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon" class="level4">
 <h4 class="anchored" data-anchor-id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon">Welcome to a mock up just to see if this actually runs. More to come soon!</h4>
-<div id="137241a5" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="mock_website_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
-<figcaption>Map of Georgia</figcaption>
-</figure>
-</div>
+</section>
+<section id="georgia-map" class="level3">
+<h3 class="anchored" data-anchor-id="georgia-map">Georgia Map</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<iframe src="map.html" width="100%" height="500px" style="border:1px solid #ccc;">
+</iframe>
+</div><div class="column" style="padding-left: 20px;">
+<section id="locality-specific-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="locality-specific-criteria">Locality-Specific Criteria</h3>
+<form>
+<p><label><input type="checkbox" onclick="toggleLayer('Desirable/Undesirable Activities')" checked=""> Desirable/Undesirable Activities (±20)</label><br></p>
+<p><label><input type="checkbox" onclick="toggleLayer('Community Transportation Options')" checked=""> Community Transportation Options (max 6)</label><br></p>
+<p><label><input type="checkbox" onclick="toggleLayer('Quality Education Areas')" checked=""> Quality Education Areas (max 3)</label><br></p>
+<p><label><input type="checkbox" onclick="toggleLayer('Stable Communities')" checked=""> Stable Communities (max 10)</label><br></p>
+<label><input type="checkbox" onclick="toggleLayer('Housing Needs Characteristics')" checked=""> Housing Needs Characteristics (max 10)</label><br>
+</form>
+</section>
 </div>
 </div>
 

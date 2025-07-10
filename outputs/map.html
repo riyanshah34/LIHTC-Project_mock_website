@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d3bf225d6ea5ce7d3c1ab433d986d7c9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_d3bf225d6ea5ce7d3c1ab433d986d7c9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d3bf225d6ea5ce7d3c1ab433d986d7c9 = L.map(
+                "map_d3bf225d6ea5ce7d3c1ab433d986d7c9",
+                {
+                    center: [32.1656, -82.9001],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_86121ad9f8831f200eaa28e7e29476dd = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_86121ad9f8831f200eaa28e7e29476dd.addTo(map_d3bf225d6ea5ce7d3c1ab433d986d7c9);
+        
+    
+            var feature_group_c76b27df3a4e52e06d634ee1232af997 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_71403497e1eee6e683dea9e2fab997b9 = L.marker(
+                [33.749, -84.388],
+                {
+}
+            ).addTo(feature_group_c76b27df3a4e52e06d634ee1232af997);
+        
+    
+        var popup_985afe37df626753ca0df10545dc3dbe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ca04329e66cdb283846880ccb6069e56 = $(`<div id="html_ca04329e66cdb283846880ccb6069e56" style="width: 100.0%; height: 100.0%;">Atlanta</div>`)[0];
+                popup_985afe37df626753ca0df10545dc3dbe.setContent(html_ca04329e66cdb283846880ccb6069e56);
+            
+        
+
+        marker_71403497e1eee6e683dea9e2fab997b9.bindPopup(popup_985afe37df626753ca0df10545dc3dbe)
+        ;
+
+        
+    
+    
+            feature_group_c76b27df3a4e52e06d634ee1232af997.addTo(map_d3bf225d6ea5ce7d3c1ab433d986d7c9);
+        
+    
+            var feature_group_404e91f6ddb8cc2a97df6609244e5820 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_6b4ea535d373ceea784a665787d07c4d = L.marker(
+                [31.1499, -81.4915],
+                {
+}
+            ).addTo(feature_group_404e91f6ddb8cc2a97df6609244e5820);
+        
+    
+        var popup_09192a1245dbd30704466b281dae9510 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7bd5d46bde4e0a2c80a0bfaecc386b4 = $(`<div id="html_d7bd5d46bde4e0a2c80a0bfaecc386b4" style="width: 100.0%; height: 100.0%;">Brunswick</div>`)[0];
+                popup_09192a1245dbd30704466b281dae9510.setContent(html_d7bd5d46bde4e0a2c80a0bfaecc386b4);
+            
+        
+
+        marker_6b4ea535d373ceea784a665787d07c4d.bindPopup(popup_09192a1245dbd30704466b281dae9510)
+        ;
+
+        
+    
+    
+            feature_group_404e91f6ddb8cc2a97df6609244e5820.addTo(map_d3bf225d6ea5ce7d3c1ab433d986d7c9);
+        
+    
+            var layer_control_819e0f37bb7c80753a7811b42175ef05_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_86121ad9f8831f200eaa28e7e29476dd,
+                },
+                overlays :  {
+                    "Urban Areas" : feature_group_c76b27df3a4e52e06d634ee1232af997,
+                    "Rural Counties" : feature_group_404e91f6ddb8cc2a97df6609244e5820,
+                },
+            };
+            let layer_control_819e0f37bb7c80753a7811b42175ef05 = L.control.layers(
+                layer_control_819e0f37bb7c80753a7811b42175ef05_layers.base_layers,
+                layer_control_819e0f37bb7c80753a7811b42175ef05_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_d3bf225d6ea5ce7d3c1ab433d986d7c9);
+
+        
+</script>
+</html>
