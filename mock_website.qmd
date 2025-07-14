@@ -17,10 +17,10 @@ format: html
 #### Georgia Map
 <form id="coord-form">
   <label>Latitude:
-    <input id="lat" type="number" value="32.9" step="0.0001" required>
+    <input id="lat" type="number" value="33.7501" step="0.0001" required>
   </label>
   <label>Longitude:
-    <input id="lon" type="number" value="-83.5" step="0.0001" required>
+    <input id="lon" type="number" value="-84.3885" step="0.0001" required>
   </label>
   <button type="submit">Place Marker</button>
 </form>
@@ -34,11 +34,13 @@ format: html
 />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
 <script>
 // Wrap in window load to ensure elements are ready
 window.addEventListener('load', () => {
   // Initialize the map
-  const map = L.map('map').setView([32.9, -83.5], 7);
+  const map = L.map('map').setView([33.7501, -84.3885], 11);
 
   // Add Esri/ArcGIS basemap
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
@@ -47,18 +49,53 @@ window.addEventListener('load', () => {
     maxZoom: 18
   }).addTo(map);
 
-  let userMarker = null;
+  function getColor(score) {
+    const maxScore = 20;
+    const midScore = maxScore / 2;
 
-  // Add marker on form submit
+    let r, g;
+
+    if (score <= midScore) {
+      const ratio = score / midScore;
+      r = Math.round(255 * ratio);
+      g = 255;
+    } else {
+      const ratio = (score - midScore) / midScore;
+      r = 255;
+      g = Math.round(255 * (1 - ratio));
+    }
+
+    return `rgb(${r},${g},0)`;
+  }
+
+  d3.csv("data/desirable_undesirable_activities/desirable_undesirable_scores.csv").then(data => {
+    data.forEach(d => {
+      const lat = parseFloat(d.lat);
+      const lon = parseFloat(d.lon);
+      const score = parseFloat(d.final_score);
+
+      if (!isNaN(lat) && !isNaN(lon) && !isNaN(score)) {
+        L.circleMarker([lat, lon], {
+          radius: 8,
+          fillColor: getColor(score),
+          color: "#000",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.8
+        }).addTo(map).bindPopup(`Score: ${score}`);
+      }
+    });
+  });
+
+  // Manual Marker for Input
+  let userMarker = null;
   document.getElementById('coord-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     const lat = parseFloat(document.getElementById('lat').value);
     const lon = parseFloat(document.getElementById('lon').value);
 
     if (!isNaN(lat) && !isNaN(lon)) {
-      if (userMarker) {
-        map.removeLayer(userMarker);
-      }
+      if (userMarker) map.removeLayer(userMarker);
       userMarker = L.marker([lat, lon]).addTo(map)
         .bindPopup(`Latitude: ${lat.toFixed(4)}<br>Longitude: ${lon.toFixed(4)}`)
         .openPopup();
