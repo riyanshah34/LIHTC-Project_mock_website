@@ -1,5 +1,5 @@
 ---
-title: "Invest Atlanta Sponsored Program to Assist Developers"
+title: "Program to Assist Developers"
 Subtitle: "Affordable Housing Tax Credit Map and Calculator"
 author: Daniel Nickas
 format: html
@@ -9,56 +9,106 @@ format: html
 
 #### Welcome to a mock up just to see if this actually runs. More to come soon!
 
-### Georgia Map
-```{python}
-#| echo: false
-#| fig-cap: "Interactive Map"
-#| fig-align: center
-import folium
 
-# Create folium map
-m = folium.Map(location=[32.1656, -82.9001], zoom_start=6)
 
-# Add sample layers
-urban = folium.FeatureGroup(name='Urban Areas').add_to(m)
-rural = folium.FeatureGroup(name='Rural Counties').add_to(m)
+### Enter Coordinates to Place a Marker:
 
-# Sample markers
-folium.Marker([33.7490, -84.3880], popup='Atlanta').add_to(urban)
-folium.Marker([31.1499, -81.4915], popup='Brunswick').add_to(rural)
 
-# Add layer control
-folium.LayerControl().add_to(m)
+#### Georgia Map
+<form id="coord-form">
+  <label>Latitude:
+    <input id="lat" type="number" value="32.9" step="0.0001" required>
+  </label>
+  <label>Longitude:
+    <input id="lon" type="number" value="-83.5" step="0.0001" required>
+  </label>
+  <button type="submit">Place Marker</button>
+</form>
 
-# Save the map to an HTML file
-m.save('map.html')
-```
+<div id="map" style="height: 500px; margin-top: 20px; border: 1px solid #aaa;"></div>
 
-:::{.columns}
-::: {.column width="50%"}
-<iframe src="map.html" width="100%" height="500px" style="border:1px solid #ccc;"></iframe>
-:::
+<!-- Load Leaflet (CSS + JS) -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// Wrap in window load to ensure elements are ready
+window.addEventListener('load', () => {
+  // Initialize the map
+  const map = L.map('map').setView([32.9, -83.5], 7);
+
+  // Add Esri/ArcGIS basemap
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
+              'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri',
+    maxZoom: 18
+  }).addTo(map);
+
+  let userMarker = null;
+
+  // Add marker on form submit
+  document.getElementById('coord-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+    const lat = parseFloat(document.getElementById('lat').value);
+    const lon = parseFloat(document.getElementById('lon').value);
+
+    if (!isNaN(lat) && !isNaN(lon)) {
+      if (userMarker) {
+        map.removeLayer(userMarker);
+      }
+      userMarker = L.marker([lat, lon]).addTo(map)
+        .bindPopup(`Latitude: ${lat.toFixed(4)}<br>Longitude: ${lon.toFixed(4)}`)
+        .openPopup();
+      map.setView([lat, lon], 8);
+    }
+  });
+});
+</script>
 
 ::: {.column width="50%" style="padding-left: 20px;"}
 ### Locality-Specific Criteria
 
-<form>
-  <label><input type="checkbox" onclick="toggleLayer('Desirable/Undesirable Activities')" checked>
+<form id="criteria-form">
+  <label><input type="checkbox" value="20" onclick="updateTotal()" checked>
     Desirable/Undesirable Activities (±20)</label><br>
 
-  <label><input type="checkbox" onclick="toggleLayer('Community Transportation Options')" checked>
+  <label><input type="checkbox" value="6" onclick="updateTotal()" checked>
     Community Transportation Options (max 6)</label><br>
 
-  <label><input type="checkbox" onclick="toggleLayer('Quality Education Areas')" checked>
+  <label><input type="checkbox" value="3" onclick="updateTotal()" checked>
     Quality Education Areas (max 3)</label><br>
 
-  <label><input type="checkbox" onclick="toggleLayer('Stable Communities')" checked>
+  <label><input type="checkbox" value="10" onclick="updateTotal()" checked>
     Stable Communities (max 10)</label><br>
 
-  <label><input type="checkbox" onclick="toggleLayer('Housing Needs Characteristics')" checked>
+  <label><input type="checkbox" value="10" onclick="updateTotal()" checked>
     Housing Needs Characteristics (max 10)</label><br>
 </form>
-:::
+
+<br>
+
+<p><strong>Total Score:</strong> <span id="score">26</span></p>
+
+<script>
+  function updateTotal() {
+    const form = document.getElementById('criteria-form');
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    let total = 0;
+    checkboxes.forEach(box => {
+      if (box.checked) {
+        total += parseInt(box.value);
+      }
+    });
+    document.getElementById('score').textContent = total;
+  }
+
+  // Run on page load
+  updateTotal();
+</script>
 :::
 
-a word
+
+

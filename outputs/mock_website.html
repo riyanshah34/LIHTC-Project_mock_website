@@ -8,7 +8,7 @@
 
 <meta name="author" content="Daniel Nickas">
 
-<title>Invest Atlanta Sponsored Program to Assist Developers – Affordable Housing Tax Credit</title>
+<title>Program to Assist Developers – Affordable Housing Tax Credit</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Invest Atlanta Sponsored Program to Assist Developers</h1>
+<h1 class="title">Program to Assist Developers</h1>
 </div>
 
 
@@ -151,29 +151,88 @@ ul.task-list li input[type="checkbox"] {
 <section id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon" class="level4">
 <h4 class="anchored" data-anchor-id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon">Welcome to a mock up just to see if this actually runs. More to come soon!</h4>
 </section>
-<section id="georgia-map" class="level3">
-<h3 class="anchored" data-anchor-id="georgia-map">Georgia Map</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<iframe src="map.html" width="100%" height="500px" style="border:1px solid #ccc;">
-</iframe>
-</div><div class="column" style="padding-left: 20px;">
+<section id="enter-coordinates-to-place-a-marker" class="level3">
+<h3 class="anchored" data-anchor-id="enter-coordinates-to-place-a-marker">Enter Coordinates to Place a Marker:</h3>
+<section id="georgia-map" class="level4">
+<h4 class="anchored" data-anchor-id="georgia-map">Georgia Map</h4>
+<form id="coord-form">
+<label>Latitude: <input id="lat" type="number" value="32.9" step="0.0001" required=""> </label> <label>Longitude: <input id="lon" type="number" value="-83.5" step="0.0001" required=""> </label> <button type="submit">Place Marker</button>
+</form>
+<div id="map" style="height: 500px; margin-top: 20px; border: 1px solid #aaa;">
+
+</div>
+<!-- Load Leaflet (CSS + JS) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// Wrap in window load to ensure elements are ready
+window.addEventListener('load', () => {
+  // Initialize the map
+  const map = L.map('map').setView([32.9, -83.5], 7);
+
+  // Add Esri/ArcGIS basemap
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
+              'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri',
+    maxZoom: 18
+  }).addTo(map);
+
+  let userMarker = null;
+
+  // Add marker on form submit
+  document.getElementById('coord-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+    const lat = parseFloat(document.getElementById('lat').value);
+    const lon = parseFloat(document.getElementById('lon').value);
+
+    if (!isNaN(lat) && !isNaN(lon)) {
+      if (userMarker) {
+        map.removeLayer(userMarker);
+      }
+      userMarker = L.marker([lat, lon]).addTo(map)
+        .bindPopup(`Latitude: ${lat.toFixed(4)}<br>Longitude: ${lon.toFixed(4)}`)
+        .openPopup();
+      map.setView([lat, lon], 8);
+    }
+  });
+});
+</script>
+</section>
+</section>
+<div class="column" style="padding-left: 20px;">
 <section id="locality-specific-criteria" class="level3">
 <h3 class="anchored" data-anchor-id="locality-specific-criteria">Locality-Specific Criteria</h3>
-<form>
-<p><label><input type="checkbox" onclick="toggleLayer('Desirable/Undesirable Activities')" checked=""> Desirable/Undesirable Activities (±20)</label><br></p>
-<p><label><input type="checkbox" onclick="toggleLayer('Community Transportation Options')" checked=""> Community Transportation Options (max 6)</label><br></p>
-<p><label><input type="checkbox" onclick="toggleLayer('Quality Education Areas')" checked=""> Quality Education Areas (max 3)</label><br></p>
-<p><label><input type="checkbox" onclick="toggleLayer('Stable Communities')" checked=""> Stable Communities (max 10)</label><br></p>
-<label><input type="checkbox" onclick="toggleLayer('Housing Needs Characteristics')" checked=""> Housing Needs Characteristics (max 10)</label><br>
+<form id="criteria-form">
+<p><label><input type="checkbox" value="20" onclick="updateTotal()" checked=""> Desirable/Undesirable Activities (±20)</label><br></p>
+<p><label><input type="checkbox" value="6" onclick="updateTotal()" checked=""> Community Transportation Options (max 6)</label><br></p>
+<p><label><input type="checkbox" value="3" onclick="updateTotal()" checked=""> Quality Education Areas (max 3)</label><br></p>
+<p><label><input type="checkbox" value="10" onclick="updateTotal()" checked=""> Stable Communities (max 10)</label><br></p>
+<label><input type="checkbox" value="10" onclick="updateTotal()" checked=""> Housing Needs Characteristics (max 10)</label><br>
 </form>
+<p><br></p>
+<p>
+<strong>Total Score:</strong> <span id="score">26</span>
+</p>
+<script>
+  function updateTotal() {
+    const form = document.getElementById('criteria-form');
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    let total = 0;
+    checkboxes.forEach(box => {
+      if (box.checked) {
+        total += parseInt(box.value);
+      }
+    });
+    document.getElementById('score').textContent = total;
+  }
+
+  // Run on page load
+  updateTotal();
+</script>
 </section>
 </div>
-</div>
-<p>a word</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
