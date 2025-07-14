@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Daniel Nickas">
 
-<title>Program to Assist Developers – Affordable Housing Tax Credit</title>
+<title>qap – Affordable Housing Tax Credit</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -90,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./mock_website.html" aria-current="page"> 
+    <a class="nav-link" href="./mock_website.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -103,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Georgia DCA LIHTC Scoring Criteria Summary</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./QAP.html"> 
+    <a class="nav-link active" href="./QAP.html" aria-current="page"> 
 <span class="menu-text">2024–2025 Georgia QAP PDF</span></a>
   </li>  
 </ul>
@@ -119,118 +118,16 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Program to Assist Developers</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Daniel Nickas </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="affordable-housing-tax-credit-calculator" class="level2">
-<h2 class="anchored" data-anchor-id="affordable-housing-tax-credit-calculator">Affordable Housing Tax Credit Calculator</h2>
-<section id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon" class="level4">
-<h4 class="anchored" data-anchor-id="welcome-to-a-mock-up-just-to-see-if-this-actually-runs.-more-to-come-soon">Welcome to a mock up just to see if this actually runs. More to come soon!</h4>
-</section>
-<section id="enter-coordinates-to-place-a-marker" class="level3">
-<h3 class="anchored" data-anchor-id="enter-coordinates-to-place-a-marker">Enter Coordinates to Place a Marker:</h3>
-<section id="georgia-map" class="level4">
-<h4 class="anchored" data-anchor-id="georgia-map">Georgia Map</h4>
-<form id="coord-form">
-<label>Latitude: <input id="lat" type="number" value="32.9" step="0.0001" required=""> </label> <label>Longitude: <input id="lon" type="number" value="-83.5" step="0.0001" required=""> </label> <button type="submit">Place Marker</button>
-</form>
-<div id="map" style="height: 500px; margin-top: 20px; border: 1px solid #aaa;">
-
-</div>
-<!-- Load Leaflet (CSS + JS) -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-// Wrap in window load to ensure elements are ready
-window.addEventListener('load', () => {
-  // Initialize the map
-  const map = L.map('map').setView([32.9, -83.5], 7);
-
-  // Add Esri/ArcGIS basemap
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
-              'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles © Esri',
-    maxZoom: 18
-  }).addTo(map);
-
-  let userMarker = null;
-
-  // Add marker on form submit
-  document.getElementById('coord-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent page reload
-    const lat = parseFloat(document.getElementById('lat').value);
-    const lon = parseFloat(document.getElementById('lon').value);
-
-    if (!isNaN(lat) && !isNaN(lon)) {
-      if (userMarker) {
-        map.removeLayer(userMarker);
-      }
-      userMarker = L.marker([lat, lon]).addTo(map)
-        .bindPopup(`Latitude: ${lat.toFixed(4)}<br>Longitude: ${lon.toFixed(4)}`)
-        .openPopup();
-      map.setView([lat, lon], 8);
-    }
-  });
-});
-</script>
-</section>
-</section>
-<div class="column" style="padding-left: 20px;">
-<section id="locality-specific-criteria" class="level3">
-<h3 class="anchored" data-anchor-id="locality-specific-criteria">Locality-Specific Criteria</h3>
-<form id="criteria-form">
-<p><label><input type="checkbox" value="20" onclick="updateTotal()" checked=""> Desirable/Undesirable Activities (±20)</label><br></p>
-<p><label><input type="checkbox" value="6" onclick="updateTotal()" checked=""> Community Transportation Options (max 6)</label><br></p>
-<p><label><input type="checkbox" value="3" onclick="updateTotal()" checked=""> Quality Education Areas (max 3)</label><br></p>
-<p><label><input type="checkbox" value="10" onclick="updateTotal()" checked=""> Stable Communities (max 10)</label><br></p>
-<label><input type="checkbox" value="10" onclick="updateTotal()" checked=""> Housing Needs Characteristics (max 10)</label><br>
-</form>
-<p><br></p>
-<p>
-<strong>Total Score:</strong> <span id="score">26</span>
-</p>
-<script>
-  function updateTotal() {
-    const form = document.getElementById('criteria-form');
-    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-    let total = 0;
-    checkboxes.forEach(box => {
-      if (box.checked) {
-        total += parseInt(box.value);
-      }
-    });
-    document.getElementById('score').textContent = total;
-  }
-
-  // Run on page load
-  updateTotal();
-</script>
-</section>
-</div>
+<section id="georgia-qap-pdf" class="level2">
+<h2 class="anchored" data-anchor-id="georgia-qap-pdf">2024–2025 Georgia QAP PDF</h2>
+<iframe src="QAP2024_2025.pdf" width="100%" height="600px">
+This browser does not support PDFs. Please download the PDF to view it: <a href="QAP2024_2025.pdf">Download PDF</a>.
+</iframe>
 
 
 </section>

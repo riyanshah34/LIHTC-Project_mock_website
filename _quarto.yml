@@ -10,4 +10,4 @@ website:
         text: Home
       - index.html
       - definitions.qmd
-    
+      - QAP.qmd

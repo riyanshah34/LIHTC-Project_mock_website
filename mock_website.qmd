@@ -1,5 +1,5 @@
 ---
-title: "Invest Atlanta Sponsored Program to Assist Developers"
+title: "Program to Assist Developers"
 Subtitle: "Affordable Housing Tax Credit Map and Calculator"
 author: Daniel Nickas
 format: html
@@ -11,18 +11,104 @@ format: html
 
 
 
+### Enter Coordinates to Place a Marker:
 
-{python}
-#| echo: false
-#| fig-cap: "Map of Georgia"
-#| fig-align: center
-import geopandas as gpd
-import matplotlib.pyplot as plt
-shapefile_path = "/Users/riyanshah/Documents/GitHub/LIHTC-Project_mock_website/data"
-states = gpd.read_file(shapefile_path)
-georgia = states[states["NAME"] == "Georgia"]
-georgia.plot(edgecolor='black', color='lightblue')
-plt.title("Map of Georgia")
-plt.axis('off')
-plt.show()
+
+#### Georgia Map
+<form id="coord-form">
+  <label>Latitude:
+    <input id="lat" type="number" value="32.9" step="0.0001" required>
+  </label>
+  <label>Longitude:
+    <input id="lon" type="number" value="-83.5" step="0.0001" required>
+  </label>
+  <button type="submit">Place Marker</button>
+</form>
+
+<div id="map" style="height: 500px; margin-top: 20px; border: 1px solid #aaa;"></div>
+
+<!-- Load Leaflet (CSS + JS) -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// Wrap in window load to ensure elements are ready
+window.addEventListener('load', () => {
+  // Initialize the map
+  const map = L.map('map').setView([32.9, -83.5], 7);
+
+  // Add Esri/ArcGIS basemap
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
+              'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri',
+    maxZoom: 18
+  }).addTo(map);
+
+  let userMarker = null;
+
+  // Add marker on form submit
+  document.getElementById('coord-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+    const lat = parseFloat(document.getElementById('lat').value);
+    const lon = parseFloat(document.getElementById('lon').value);
+
+    if (!isNaN(lat) && !isNaN(lon)) {
+      if (userMarker) {
+        map.removeLayer(userMarker);
+      }
+      userMarker = L.marker([lat, lon]).addTo(map)
+        .bindPopup(`Latitude: ${lat.toFixed(4)}<br>Longitude: ${lon.toFixed(4)}`)
+        .openPopup();
+      map.setView([lat, lon], 8);
+    }
+  });
+});
+</script>
+
+::: {.column width="50%" style="padding-left: 20px;"}
+### Locality-Specific Criteria
+
+<form id="criteria-form">
+  <label><input type="checkbox" value="20" onclick="updateTotal()" checked>
+    Desirable/Undesirable Activities (±20)</label><br>
+
+  <label><input type="checkbox" value="6" onclick="updateTotal()" checked>
+    Community Transportation Options (max 6)</label><br>
+
+  <label><input type="checkbox" value="3" onclick="updateTotal()" checked>
+    Quality Education Areas (max 3)</label><br>
+
+  <label><input type="checkbox" value="10" onclick="updateTotal()" checked>
+    Stable Communities (max 10)</label><br>
+
+  <label><input type="checkbox" value="10" onclick="updateTotal()" checked>
+    Housing Needs Characteristics (max 10)</label><br>
+</form>
+
+<br>
+
+<p><strong>Total Score:</strong> <span id="score">26</span></p>
+
+<script>
+  function updateTotal() {
+    const form = document.getElementById('criteria-form');
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    let total = 0;
+    checkboxes.forEach(box => {
+      if (box.checked) {
+        total += parseInt(box.value);
+      }
+    });
+    document.getElementById('score').textContent = total;
+  }
+
+  // Run on page load
+  updateTotal();
+</script>
+:::
+
+
 
