@@ -197,7 +197,7 @@ window.addEventListener('load', () => {
     return `rgb(${r},${g},0)`;
   }
 
-  d3.csv("data/desirable_undesirable_activities/desirable_undesirable_scores.csv").then(data => {
+  d3.csv("desirable_undesirable_scores.csv").then(data => {
     data.forEach(d => {
       const lat = parseFloat(d.lat);
       const lon = parseFloat(d.lon);
