@@ -197,20 +197,25 @@ window.addEventListener('load', () => {
     return `rgb(${r},${g},0)`;
   }
 
-  d3.csv("desirable_undesirable_scores.csv").then(data => {
+  const squareSize = 0.01;
+
+  d3.csv("data/desirable_undesirable_activities/desirable_undesirable_scores.csv").then(data => {
     data.forEach(d => {
       const lat = parseFloat(d.lat);
       const lon = parseFloat(d.lon);
       const score = parseFloat(d.final_score);
 
       if (!isNaN(lat) && !isNaN(lon) && !isNaN(score)) {
-        L.circleMarker([lat, lon], {
-          radius: 8,
-          fillColor: getColor(score),
-          color: "#000",
-          weight: 1,
-          opacity: 1,
-          fillOpacity: 0.8
+        const bounds = [
+          [lat - squareSize, lon - squareSize], // Southwest corner
+          [lat + squareSize, lon + squareSize]  // Northeast corner
+        ];
+
+        L.rectangle(bounds, {
+          stroke: false,                // No border
+          fillColor: getColor(score),   // Your gradient fill function
+          fillOpacity: 0.3,
+          weight: 0
         }).addTo(map).bindPopup(`Score: ${score}`);
       }
     });

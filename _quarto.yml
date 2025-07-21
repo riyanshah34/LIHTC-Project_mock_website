@@ -1,6 +1,8 @@
-project: 
+project:
   type: website
   output-dir: outputs
+  resources:
+    - data/
 
 website:
   title: "Affordable Housing Tax Credit"
